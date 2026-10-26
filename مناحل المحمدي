@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مناحل المحمدي | أجود أنواع العسل والمنتجات الطبيعية</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Cairo Font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        amber: {
+                            50: '#fffbe1',
+                            100: '#fef3c7',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                        },
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #FAFAFA;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d97706;
+            border-radius: 4px;
+        }
+        .honeycomb-bg {
+            background-color: #ffffff;
+            background-image: radial-gradient(#f59e0b 0.55px, transparent 0.55px), radial-gradient(#f59e0b 0.55px, #ffffff 0.55px);
+            background-size: 22px 22px;
+            background-position: 0 0,11px 11px;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 min-h-screen flex flex-col justify-between">
+
+    <!-- Top Banner -->
+    <div class="bg-amber-700 text-white text-xs sm:text-sm py-2 px-4 text-center font-medium shadow-inner flex justify-between items-center max-w-7xl mx-auto w-full">
+        <div class="flex items-center gap-2 mx-auto sm:mx-0">
+            <i class="fa-solid font-bold fa-truck-fast text-amber-300"></i>
+            <span>من مناحلنا لبيتك مباشرة | جودة نعتز بها 🍯✨</span>
+        </div>
+        <div class="hidden sm:flex items-center gap-4 text-xs">
+            <a href="tel:01118877988" class="hover:text-amber-200 transition flex items-center gap-1">
+                <i class="fa-solid fa-phone text-amber-300"></i> 01118877988
+            </a>
+            <span>|</span>
+            <a href="https://wa.me/201118877988?text=مرحباً%20مناحل%20المحمدي،%20أود%20الاستفسار%20عن%20منتجاتكم" target="_blank" class="hover:text-amber-200 transition flex items-center gap-1">
+                <i class="fa-brands fa-whatsapp text-emerald-400"></i> واتساب مباشر
+            </a>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-md transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20 gap-4">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="filterCategory('all')">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 flex items-center justify-center text-white shadow-lg shadow-amber-500/30">
+                        <i class="fa-solid fa-jar-wheat text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-extrabold text-stone-900 tracking-tight leading-none">
+                            مناحل <span class="text-amber-600">المحمدي</span>
+                        </h1>
+                        <p class="text-xs text-amber-700 font-semibold mt-1">عسل طبيعي ومنتجات الخلية الأصيلة</p>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex flex-1 max-w-md mx-8 relative">
+                    <input type="text" id="searchInput" oninput="searchProducts()" placeholder="ابحث عن عسل برسيم، فلسطيني، مكسرات، غذاء ملكات..." 
+                        class="w-full pl-10 pr-4 py-2.5 rounded-full border border-stone-300 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 text-sm transition">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-stone-400"></i>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleMobileSearch()" class="md:hidden p-2.5 text-stone-600 hover:text-amber-600 rounded-full hover:bg-stone-100 transition">
+                        <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                    </button>
+                    <button onclick="openCart()" class="relative bg-amber-500 hover:bg-amber-600 text-white px-4 py-2.5 rounded-full flex items-center gap-2 font-bold shadow-md shadow-amber-500/20 transition transform active:scale-95">
+                        <i class="fa-solid fa-basket-shopping text-lg"></i>
+                        <span class="hidden sm:inline">السلة</span>
+                        <span id="cartBadge" class="bg-stone-900 text-amber-400 text-xs font-bold px-2 py-0.5 rounded-full">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobileSearchDrawer" class="hidden md:hidden pb-4">
+                <div class="relative">
+                    <input type="text" id="searchInputMobile" oninput="searchProductsMobile()" placeholder="ابحث عن منتج..." 
+                        class="w-full pl-10 pr-4 py-2 rounded-full border border-stone-300 focus:outline-none focus:border-amber-500 text-sm">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-2.5 text-stone-400"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="relative bg-gradient-to-r from-amber-900 via-amber-800 to-amber-950 text-white py-12 md:py-16 overflow-hidden">
+        <div class="absolute inset-0 opacity-10 honeycomb-bg"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="text-center md:text-right max-w-xl">
+                <span class="bg-amber-500/20 text-amber-300 text-xs px-3 py-1 rounded-full border border-amber-500/30 font-semibold mb-4 inline-block">
+                    🍯 من مناحلنا لبيتك مباشرة
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-black text-white leading-tight mb-4">
+                    شفاءٌ وطاقة من قلب الطبيعة
+                </h2>
+                <p class="text-stone-200 text-sm sm:text-base mb-6 leading-relaxed">
+                    نقدم لكم أجود أنواع عسل النحل الطبيعي، المختوم الفلسطيني الأصلي، والمكملات والخلطات الخاصة المضمونة لرفع المناعة والصحة العامة.
+                </p>
+                <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                    <a href="#productsSection" class="bg-amber-500 hover:bg-amber-400 text-stone-900 font-bold px-6 py-3 rounded-full transition shadow-lg text-sm flex items-center gap-2">
+                        تصفح المنتجات والأسعار <i class="fa-solid fa-arrow-left"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center">
+                <div class="absolute inset-0 bg-amber-500/20 rounded-full blur-2xl animate-pulse"></div>
+                <div class="w-full h-full rounded-3xl bg-amber-700/40 border border-amber-500/30 p-4 backdrop-blur-md flex flex-col items-center justify-center text-center shadow-2xl">
+                    <i class="fa-solid fa-award text-6xl text-amber-400 mb-3"></i>
+                    <h3 class="text-xl font-bold text-amber-200">إشراف المهندس محمد أشرف</h3>
+                    <p class="text-xs text-stone-300 mt-2">جودة نعتز بها وخبرة حقيقية في عالم النحل</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="productsSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full">
+        
+        <div class="flex items-center justify-between flex-wrap gap-4 mb-8">
+            <div>
+                <h2 class="text-2xl font-bold text-stone-800">قائمة الأسعار والمنتجات</h2>
+                <p class="text-xs text-stone-500 mt-1">اختر القسم المناسب لتصفح المنتجات وطلبها بسهولة</p>
+            </div>
+            
+            <div class="flex items-center gap-2 overflow-x-auto pb-2 w-full md:w-auto scrollbar-none" id="categoriesContainer">
+                <button onclick="filterCategory('all')" class="cat-btn active bg-amber-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-sm transition whitespace-nowrap">
+                    الكل
+                </button>
+                <button onclick="filterCategory('pure_honey')" class="cat-btn bg-white text-stone-700 hover:bg-amber-100 px-4 py-2 rounded-full text-sm font-semibold border border-stone-200 transition whitespace-nowrap">
+                    عسل النحل الطبيعي
+                </button>
+                <button onclick="filterCategory('palestinian')" class="cat-btn bg-white text-stone-700 hover:bg-amber-100 px-4 py-2 rounded-full text-sm font-semibold border border-stone-200 transition whitespace-nowrap">
+                    المختوم الفلسطيني
+                </button>
+                <button onclick="filterCategory('supplements')" class="cat-btn bg-white text-stone-700 hover:bg-amber-100 px-4 py-2 rounded-full text-sm font-semibold border border-stone-200 transition whitespace-nowrap">
+                    المكملات والخلطات
+                </button>
+                <button onclick="filterCategory('wholesale')" class="cat-btn bg-white text-stone-700 hover:bg-amber-100 px-4 py-2 rounded-full text-sm font-semibold border border-stone-200 transition whitespace-nowrap">
+                    عروض الجملة
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5 mb-8 text-amber-900 flex items-start gap-4">
+            <div class="bg-amber-500 text-white p-3 rounded-xl text-xl flex items-center justify-center">
+                <i class="fa-solid fa-flask"></i>
+            </div>
+            <div>
+                <h3 class="font-bold text-base mb-1">خلطات خاصة ومجربة من مناحل المحمدي</h3>
+                <p class="text-xs leading-relaxed text-amber-800">
+                    متاح لدينا خلطات خاصة ومجربة لـ: <strong>(رفع المناعة - زيادة الوزن - المتزوجين - الأطفال)</strong>. يمكنك طلبها مباشرة أو التواصل عبر الواتساب لتخصيص الخلطة حسب رغبتك.
+                </p>
+            </div>
+        </div>
+
+        <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+
+        <div id="emptyState" class="hidden text-center py-16">
+            <i class="fa-solid fa-box-open text-4xl text-stone-300 mb-3"></i>
+            <p class="text-stone-600 font-bold">عذراً، لم نجد منتجات تطابق بحثك</p>
+        </div>
+
+    </main>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/201118877988?text=مرحباً%20مناحل%20المحمدي،%20أود%20الاستفسار%20عن%20منتجاتكم" 
+       target="_blank" 
+       title="تواصل معنا عبر واتساب"
+       class="fixed bottom-6 left-6 z-40 bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 group">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+        <span class="absolute left-16 bg-stone-900 text-white text-xs px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition duration-300 shadow-md">
+            تواصل معنا مباشرة 💬
+        </span>
+    </a>
+
+    <!-- Contact Section -->
+    <section id="contactSection" class="py-12 bg-white border-t border-stone-200 mt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-xs font-bold text-amber-600 bg-amber-100 px-3 py-1 rounded-full">لطلب والاستفسار</span>
+                <h2 class="text-2xl font-extrabold text-stone-800 mt-2">تواصل مع إدارة المناحل مباشرة</h2>
+                <p class="text-xs text-stone-500 mt-1">مسؤول المبيعات والطلب: محمد أشرف</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-emerald-50/50 p-6 rounded-2xl border border-emerald-200 text-center hover:border-emerald-500 transition">
+                    <div class="w-14 h-14 bg-emerald-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl shadow-md">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <h3 class="font-bold text-stone-800 text-base mb-1">واتساب والاتصال الهاتفي</h3>
+                    <p class="text-xs text-stone-500 mb-4">محمد أشرف</p>
+                    <a href="https://wa.me/201118877988?text=مرحباً%20محمد%20أشرف،%20أود%20الطلب%20من%20مناحل%20المحمدي" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-full text-xs transition shadow-md">
+                        <i class="fa-brands fa-whatsapp"></i> 01118877988
+                    </a>
+                </div>
+
+                <div class="bg-sky-50/50 p-6 rounded-2xl border border-sky-200 text-center hover:border-sky-500 transition">
+                    <div class="w-14 h-14 bg-sky-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl shadow-md">
+                        <i class="fa-brands fa-telegram"></i>
+                    </div>
+                    <h3 class="font-bold text-stone-800 text-base mb-1">تليجرام</h3>
+                    <p class="text-xs text-stone-500 mb-4">راسلنا عبر التليجرام مباشرة</p>
+                    <a href="https://t.me/mohamedashraf2345" target="_blank" class="inline-flex items-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-2.5 rounded-full text-xs transition shadow-md">
+                        <i class="fa-brands fa-telegram"></i> @mohamedashraf2345
+                    </a>
+                </div>
+
+                <div class="bg-stone-50 p-6 rounded-2xl border border-stone-200 text-center hover:border-amber-400 transition">
+                    <div class="w-14 h-14 bg-amber-500 text-stone-900 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl shadow-md">
+                        <i class="fa-solid fa-jar-wheat"></i>
+                    </div>
+                    <h3 class="font-bold text-stone-800 text-base mb-1">مناحل المحمدي</h3>
+                    <p class="text-xs text-stone-500 mb-1">من مناحلنا لبيتك مباشرة</p>
+                    <p class="text-xs font-semibold text-amber-700">جودة نعتز بها دائماً</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-300 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-stone-500">
+            <p>© 2026 مناحل المحمدي - إشراف محمد أشرف. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- CART SLIDE-OVER DRAWER -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 overflow-hidden hidden" role="dialog" aria-modal="true">
+        <div class="absolute inset-0 bg-stone-900/60 backdrop-blur-sm transition-opacity" onclick="closeCart()"></div>
+        <div class="pointer-events-none fixed inset-y-0 left-0 flex max-w-full pl-10">
+            <div class="pointer-events-auto w-screen max-w-md transform transition ease-in-out duration-300 bg-white shadow-2xl flex flex-col justify-between">
+                <div class="p-4 bg-stone-900 text-white flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-basket-shopping text-amber-400"></i>
+                        <h2 class="text-base font-bold">سلة التسوق</h2>
+                        <span id="drawerBadge" class="bg-amber-500 text-stone-900 text-xs px-2 py-0.5 rounded-full font-bold">0</span>
+                    </div>
+                    <button onclick="closeCart()" class="text-stone-400 hover:text-white transition p-1">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-4 space-y-4"></div>
+
+                <div id="emptyCartView" class="hidden flex-1 flex flex-col items-center justify-center p-6 text-center">
+                    <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 mb-3 text-2xl">
+                        <i class="fa-solid fa-cart-flatbed font-light"></i>
+                    </div>
+                    <p class="text-stone-700 font-bold">سلتك فارغة حالياً</p>
+                    <p class="text-xs text-stone-400 mt-1">تصفح المنتجات وأضف ما يعجبك إلى السلة.</p>
+                    <button onclick="closeCart()" class="mt-4 bg-amber-500 text-stone-900 font-bold px-5 py-2 rounded-full text-xs hover:bg-amber-400 transition">
+                        تصفح المنتجات
+                    </button>
+                </div>
+
+                <div id="cartFooter" class="p-4 border-t border-stone-200 bg-stone-50">
+                    <div class="space-y-2 mb-4">
+                        <div class="flex justify-between text-sm text-stone-600">
+                            <span>المجموع الفرعي</span>
+                            <span id="subtotalPrice" class="font-bold text-stone-800">0 ج.م</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-stone-600">
+                            <span>التوصيل</span>
+                            <span class="text-emerald-600 font-bold">يحدد عند الطلب</span>
+                        </div>
+                        <div class="flex justify-between text-base font-extrabold text-stone-900 pt-2 border-t border-stone-200">
+                            <span>الإجمالي</span>
+                            <span id="totalPrice" class="text-amber-700">0 ج.م</span>
+                        </div>
+                    </div>
+
+                    <button onclick="openCheckoutModal()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-lg transition active:scale-95">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        <span>متابعة الشراء عبر WhatsApp</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+        <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+            <div class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm transition-opacity" onclick="closeCheckoutModal()"></div>
+            <div class="relative transform overflow-hidden rounded-2xl bg-white text-right shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-lg w-full">
+                <div class="bg-amber-600 p-4 text-white flex justify-between items-center">
+                    <h3 class="font-bold text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-clipboard-check"></i> تفاصيل الشحن والطلب
+                    </h3>
+                    <button onclick="closeCheckoutModal()" class="text-amber-200 hover:text-white">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <form id="checkoutForm" onsubmit="submitOrder(event)" class="p-6 space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 mb-1">الاسم بالكامل *</label>
+                        <input type="text" id="custName" required placeholder="مثال: أحمد محمد" 
+                            class="w-full border border-stone-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 mb-1">رقم الهاتف (واتساب) *</label>
+                        <input type="tel" id="custPhone" required placeholder="01118877988" 
+                            class="w-full border border-stone-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 mb-1">العنوان بالتفصيل *</label>
+                        <textarea id="custAddress" required rows="2" placeholder="المحافظة، المدينة، اسم الشارع، رقم المبنى" 
+                            class="w-full border border-stone-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 mb-1">ملاحظات إضافية (اختياري)</label>
+                        <input type="text" id="custNotes" placeholder="أي تعليمات خاصة أو طلب خلطة مخصصة" 
+                            class="w-full border border-stone-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    </div>
+
+                    <div class="bg-amber-50 p-3 rounded-lg border border-amber-200 text-xs text-amber-800 flex items-start gap-2">
+                        <i class="fa-solid fa-circle-info mt-0.5"></i>
+                        <span>عند الضغط على إرسال، سيتم توجيهك مباشرة لفتح تطبيق واتساب لإرسال ملخص الطلب إلى المهندس محمد أشرف لتأكيده.</span>
+                    </div>
+
+                    <div class="pt-2 flex gap-3">
+                        <button type="submit" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-sm transition shadow-md flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> إرسال الطلب عبر واتساب
+                        </button>
+                        <button type="button" onclick="closeCheckoutModal()" class="bg-stone-200 hover:bg-stone-300 text-stone-700 font-bold px-4 py-3 rounded-xl text-sm transition">
+                            إلغاء
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 bg-stone-900 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+        <span id="toastMessage" class="text-xs font-semibold">تمت إضافة المنتج بنجاح</span>
+    </div>
+
+    <!-- JavaScript Database & Logic -->
+    <script>
+        const products = [
+            {
+                id: 1,
+                name: "عسل برسيم (قطفة أولى)",
+                category: "pure_honey",
+                price: 200,
+                weight: "1 كجم",
+                rating: 4.9,
+                reviewsCount: 45,
+                image: "1000219479.jpg",
+                description: "عسل برسيم طبيعي نقي قطفة أولى من مناحل المحمدي، غني بالعناصر الغذائية المفيدة والمذاق الأصيل."
+            },
+            {
+                id: 2,
+                name: "عسل موالح",
+                category: "pure_honey",
+                price: 200,
+                weight: "1 كجم",
+                rating: 4.8,
+                reviewsCount: 38,
+                image: "1000219478.jpg",
+                description: "عسل زهور الموالح والليمون، خفيف ولذيذ وغني بفيتامين سي الطبيعي."
+            },
+            {
+                id: 3,
+                name: "عسل برسيم (قطفة ثانية)",
+                category: "pure_honey",
+                price: 150,
+                weight: "1 كجم",
+                rating: 4.7,
+                reviewsCount: 30,
+                image: "1000219479.jpg",
+                description: "عسل برسيم قطفة ثانية بجودة عالية وسعر اقتصادي مناسب للاستخدام اليومي."
+            },
+            {
+                id: 4,
+                name: "عسل حبة البركة",
+                category: "pure_honey",
+                price: 200,
+                weight: "1 كجم",
+                rating: 5.0,
+                reviewsCount: 62,
+                image: "1000219477.jpg",
+                description: "عسل ناتج عن تغذية النحل على أزهار حبة البركة لجمع مضاعف للفوائد الصحية."
+            },
+            {
+                id: 5,
+                name: "عسل بردقوش / موالح",
+                category: "pure_honey",
+                price: 200,
+                weight: "1 كجم",
+                rating: 4.8,
+                reviewsCount: 29,
+                image: "1000219478.jpg",
+                description: "توليفة طبيعية مفيدة للجهاز التنفسي والهضمي مستخلصة من أعشاب البردقوش والموالح."
+            },
+            {
+                id: 6,
+                name: "عسل المختوم الفلسطيني (250 جرام)",
+                category: "palestinian",
+                price: 150,
+                weight: "250 جرام",
+                rating: 5.0,
+                reviewsCount: 55,
+                image: "1000219480.jpg",
+                description: "عسل مختوم فلسطيني أصلي من إنتاج مناحل المحمدي، عبوة 250 جرام نقية ومضمونة 100%."
+            },
+            {
+                id: 7,
+                name: "عسل المختوم الفلسطيني (300 جرام)",
+                category: "palestinian",
+                price: 200,
+                weight: "300 جرام",
+                rating: 4.9,
+                reviewsCount: 40,
+                image: "1000219480.jpg",
+                description: "عسل مختوم فلسطيني أصلي، عبوة 300 جرام ممتازة للاستخدام الفردي أو الهدايا."
+            },
+            {
+                id: 8,
+                name: "عسل المختوم الفلسطيني (400 جرام)",
+                category: "palestinian",
+                price: 300,
+                weight: "400 جرام",
+                rating: 4.9,
+                reviewsCount: 48,
+                image: "1000219480.jpg",
+                description: "عسل مختوم فلسطيني أصلي، عبوة 400 جرام لتعزيز المناعة والصحة."
+            },
+            {
+                id: 9,
+                name: "عسل المختوم الفلسطيني (600 جرام)",
+                category: "palestinian",
+                price: 400,
+                weight: "600 جرام",
+                rating: 5.0,
+                reviewsCount: 70,
+                image: "1000219480.jpg",
+                description: "عسل مختوم فلسطيني أصلي، عبوة 600 جرام اقتصادية وعالية الجودة."
+            },
+            {
+                id: 10,
+                name: "عسل المختوم الفلسطيني (900 جرام)",
+                category: "palestinian",
+                price: 600,
+                weight: "900 جرام",
+                rating: 5.0,
+                reviewsCount: 85,
+                image: "1000219480.jpg",
+                description: "عسل مختوم فلسطيني أصلي، عبوة 900 جرام كبرى تكفي الأسرة."
+            },
+            {
+                id: 11,
+                name: "عسل المختوم الفلسطيني (1100 جرام)",
+                category: "palestinian",
+                price: 700,
+                weight: "1100 جرام",
+                rating: 5.0,
+                reviewsCount: 92,
+                image: "1000219480.jpg",
+                description: "عسل مختوم فلسطيني أصلي، العبوة الأكبر 1100 جرام لأصحاب الذوق الرفيع."
+            },
+            {
+                id: 12,
+                name: "برطمان مكسرات بالعسل",
+                category: "supplements",
+                price: 90,
+                weight: "قطعة",
+                rating: 4.9,
+                reviewsCount: 115,
+                image: "1000219480.jpg",
+                description: "برطمان غني بأجود المكسرات المخلوطة بعسل مناحل المحمدي النقي."
+            },
+            {
+                id: 13,
+                name: "غذاء ملكات النحل الطازج",
+                category: "supplements",
+                price: 50,
+                weight: "7 جرام",
+                rating: 5.0,
+                reviewsCount: 88,
+                image: "1000219487.jpg",
+                description: "غذاء ملكات نقي طازج (7 جرام)، مع خصومات خاصة للكميات وعند الطلب."
+            },
+            {
+                id: 14,
+                name: "حبوب اللقاح البلدي",
+                category: "supplements",
+                price: 60,
+                weight: "50 جرام",
+                rating: 4.8,
+                reviewsCount: 44,
+                image: "1000219488.jpg",
+                description: "حبوب لقاح طبيعية لزيادة الحيوية والنشاط اليومي (عبوة 50 جرام)."
+            },
+            {
+                id: 15,
+                name: "جينسينج / بروبليس (عكبر)",
+                category: "supplements",
+                price: 5,
+                weight: "للجرام الواحد",
+                rating: 4.9,
+                reviewsCount: 36,
+                image: "1000219487.jpg",
+                description: "بروبليس أو جينسينج عالي الجودة، يبدأ السعر من 5 جنيهات للجرام."
+            },
+            {
+                id: 16,
+                name: "طلع نخل بيور",
+                category: "supplements",
+                price: 2,
+                weight: "للجرام الواحد",
+                rating: 4.9,
+                reviewsCount: 50,
+                image: "1000219488.jpg",
+                description: "طلع نخل بيور أصلي، يبدأ السعر من 2 جنيه للجرام."
+            },
+            {
+                id: 17,
+                name: "جنين قمح نقي",
+                category: "supplements",
+                price: 600,
+                weight: "1 كجم",
+                rating: 4.8,
+                reviewsCount: 27,
+                image: "1000219487.jpg",
+                description: "جنين قمح غني بالفيتامينات والمعادن، الكيلو بسعر 600 جنيه."
+            },
+            {
+                id: 18,
+                name: "كرتونة عسل برسيم قطفة أولى (12 برطمان)",
+                category: "wholesale",
+                price: 2000,
+                weight: "كرتونة (12 برطمان)",
+                rating: 5.0,
+                reviewsCount: 30,
+                image: "1000219479.jpg",
+                description: "عرض جملة مميز: كرتونة عسل برسيم قطفة أولى (12 برطمان) بـ 2000 ج بدلاً من 2400 ج."
+            },
+            {
+                id: 19,
+                name: "كرتونة عسل برسيم قطفة ثانية (12 برطمان)",
+                category: "wholesale",
+                price: 1000,
+                weight: "كرتونة (12 برطمان)",
+                rating: 4.9,
+                reviewsCount: 25,
+                image: "1000219479.jpg",
+                description: "عرض جملة اقتصادي: كرتونة عسل برسيم قطفة ثانية (12 برطمان) بـ 1000 ج بدلاً من 1500 ج."
+            },
+            {
+                id: 20,
+                name: "كرتونة مكسرات بالعسل (12 برطمان)",
+                category: "wholesale",
+                price: 1000,
+                weight: "كرتونة (12 برطمان)",
+                rating: 5.0,
+                reviewsCount: 35,
+                image: "1000219480.jpg",
+                description: "عرض جملة لأصحاب المحلات: كرتونة مكسرات بالعسل (12 برطمان) بـ 1000 ج بدلاً من 1080 ج."
+            }
+        ];
+
+        let cart = [];
+        let activeCategory = 'all';
+        let searchQuery = '';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            updateCartUI();
+        });
+
+        function filterCategory(category) {
+            activeCategory = category;
+            const buttons = document.querySelectorAll('.cat-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-amber-600', 'text-white', 'shadow-sm');
+                btn.classList.add('bg-white', 'text-stone-700', 'hover:bg-amber-100');
+            });
+            event.currentTarget.classList.remove('bg-white', 'text-stone-700', 'hover:bg-amber-100');
+            event.currentTarget.classList.add('bg-amber-600', 'text-white', 'shadow-sm');
+            renderProducts();
+        }
+
+        function searchProducts() {
+            searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
+            renderProducts();
+        }
+
+        function searchProductsMobile() {
+            searchQuery = document.getElementById('searchInputMobile').value.trim().toLowerCase();
+            renderProducts();
+        }
+
+        function toggleMobileSearch() {
+            document.getElementById('mobileSearchDrawer').classList.toggle('hidden');
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            const emptyState = document.getElementById('emptyState');
+            
+            const filtered = products.filter(p => {
+                const matchesCategory = (activeCategory === 'all' || p.category === activeCategory);
+                const matchesSearch = p.name.toLowerCase().includes(searchQuery) || p.description.toLowerCase().includes(searchQuery);
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = filtered.map(p => `
+                <div class="bg-white rounded-2xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="relative overflow-hidden h-48 bg-stone-100">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/f59e0b/ffffff?text=مناحل+المحمدي'">
+                            <span class="absolute top-3 right-3 bg-amber-500/95 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-md">
+                                ${p.weight}
+                            </span>
+                        </div>
+
+                        <div class="p-5">
+                            <div class="flex items-center justify-between text-xs text-amber-600 font-semibold mb-1">
+                                <div class="flex items-center gap-1">
+                                    <i class="fa-solid fa-star text-amber-400"></i>
+                                    <span>${p.rating}</span>
+                                    <span class="text-stone-400">(${p.reviewsCount})</span>
+                                </div>
+                                <span class="text-stone-400">جودة مضمونة</span>
+                            </div>
+
+                            <h3 class="font-bold text-stone-800 text-base mb-1">${p.name}</h3>
+                            <p class="text-stone-500 text-xs line-clamp-2 leading-relaxed mb-4">${p.description}</p>
+                        </div>
+                    </div>
+
+                    <div class="px-5 pb-5 pt-0 flex items-center justify-between border-t border-stone-100 mt-auto">
+                        <div>
+                            <span class="text-xs text-stone-400 block">السعر</span>
+                            <span class="text-lg font-extrabold text-amber-700">${p.price} <span class="text-xs font-normal">ج.م</span></span>
+                        </div>
+
+                        <button onclick="addToCart(${p.id})" class="bg-amber-500 hover:bg-amber-600 active:scale-95 text-stone-900 font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-sm transition">
+                            <i class="fa-solid fa-plus"></i> أضف للسلة
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addToCart(productId) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity += 1;
+            } else {
+                const product = products.find(p => p.id === productId);
+                cart.push({ ...product, quantity: 1 });
+            }
+            updateCartUI();
+            showToast('تمت إضافة المنتج إلى سلة التسوق');
+        }
+
+        function updateQuantity(productId, change) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== productId);
+                }
+            }
+            updateCartUI();
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(i => i.id !== productId);
+            updateCartUI();
+            showToast('تم إزالة المنتج من السلة');
+        }
+
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            document.getElementById('cartBadge').innerText = totalItems;
+            document.getElementById('drawerBadge').innerText = totalItems;
+
+            const container = document.getElementById('cartItemsContainer');
+            const emptyView = document.getElementById('emptyCartView');
+            const cartFooter = document.getElementById('cartFooter');
+
+            if (cart.length === 0) {
+                container.innerHTML = '';
+                emptyView.classList.remove('hidden');
+                cartFooter.classList.add('hidden');
+                return;
+            }
+
+            emptyView.classList.add('hidden');
+            cartFooter.classList.remove('hidden');
+
+            container.innerHTML = cart.map(item => `
+                <div class="flex items-center gap-3 p-3 bg-stone-50 rounded-xl border border-stone-200/60">
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg" onerror="this.src='https://placehold.co/100x100/f59e0b/ffffff?text=Honey'">
+                    <div class="flex-1">
+                        <h4 class="font-bold text-xs text-stone-800">${item.name}</h4>
+                        <span class="text-xs text-amber-700 font-bold block mt-1">${item.price} ج.م</span>
+                        
+                        <div class="flex items-center gap-2 mt-2">
+                            <button onclick="updateQuantity(${item.id}, -1)" class="w-6 h-6 rounded-md bg-stone-200 hover:bg-stone-300 text-stone-800 text-xs flex items-center justify-center font-bold">-</button>
+                            <span class="text-xs font-bold px-1">${item.quantity}</span>
+                            <button onclick="updateQuantity(${item.id}, 1)" class="w-6 h-6 rounded-md bg-stone-200 hover:bg-stone-300 text-stone-800 text-xs flex items-center justify-center font-bold">+</button>
+                        </div>
+                    </div>
+                    <button onclick="removeFromCart(${item.id})" class="text-stone-400 hover:text-red-500 p-1">
+                        <i class="fa-solid fa-trash-can text-sm"></i>
+                    </button>
+                </div>
+            `).join('');
+
+            document.getElementById('subtotalPrice').innerText = `${subtotal} ج.م`;
+            document.getElementById('totalPrice').innerText = `${subtotal} ج.م`;
+        }
+
+        function openCart() {
+            document.getElementById('cartDrawer').classList.remove('hidden');
+        }
+
+        function closeCart() {
+            document.getElementById('cartDrawer').classList.add('hidden');
+        }
+
+        function openCheckoutModal() {
+            if (cart.length === 0) return;
+            closeCart();
+            document.getElementById('checkoutModal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.add('hidden');
+        }
+
+        function submitOrder(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+            const notes = document.getElementById('custNotes').value.trim();
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            let message = `*طلب جديد من متجر مناحل المحمدي* 🐝🍯\n\n`;
+            message += `*تفاصيل العميل:*\n`;
+            message += `• الاسم: ${name}\n`;
+            message += `• الهاتف: ${phone}\n`;
+            message += `• العنوان: ${address}\n`;
+            if (notes) message += `• ملاحظات/طلبات خاصة: ${notes}\n`;
+            message += `\n*المنتجات المطلوبة:*\n`;
+
+            cart.forEach((item, index) => {
+                message += `${index + 1}. ${item.name} (${item.weight}) × ${item.quantity} = ${item.price * item.quantity} ج.م\n`;
+            });
+
+            message += `\n*الإجمالي النهائي:* ${subtotal} ج.م\n`;
+            message += `--- الإشراف: محمد أشرف ---`;
+
+            const storePhoneNumber = "201118877988"; 
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${storePhoneNumber}?text=${encodedMessage}`;
+
+            window.open(whatsappURL, '_blank');
+            closeCheckoutModal();
+            cart = [];
+            updateCartUI();
+            showToast('تم توجيه طلبك بنجاح إلى واتساب المهندس محمد أشرف!');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
